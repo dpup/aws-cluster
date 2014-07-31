@@ -1,0 +1,13 @@
+[Unit]
+Description=Default apache web server
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=core
+ExecStartPre=/usr/bin/docker pull pupius/defaultweb
+ExecStart=/usr/bin/docker run --rm --name defaultweb -p 5000:80 pupius/defaultweb /usr/sbin/apache2ctl -D FOREGROUND
+ExecStop=/usr/bin/docker rm -f defaultweb
+
+[Install]
+WantedBy=multi-user.target

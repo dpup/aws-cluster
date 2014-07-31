@@ -1,0 +1,20 @@
+[Unit]
+Description=Announce defaultweb
+BindsTo=defaultweb.service
+After=defaultweb.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+RemainAfterExit=yes
+
+ExecStart=/bin/sh -c "/bin/etcdctl set \"/vulcand/upstreams/defaultweb/endpoints/defaultweb.service\" http://$COREOS_PRIVATE_IPV4:5000; \
+  /bin/etcdctl set \"/vulcand/hosts/601fourth.com/locations/home/path\" '/.*'; \
+  /bin/etcdctl set /vulcand/hosts/601fourth.com/locations/home/upstream defaultweb"
+ExecStop=/bin/sh -c "/bin/etcdctl rm /vulcand/upstreams/defaultweb/endpoints/defaultweb.service"
+
+[X-Fleet]
+X-ConditionMachineOf=defaultweb.service
+
+[Install]
+WantedBy=multi-user.target
