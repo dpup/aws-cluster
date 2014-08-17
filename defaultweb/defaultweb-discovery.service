@@ -1,5 +1,5 @@
 [Unit]
-Description=Announce defaultweb
+Description=defaultweb announce
 BindsTo=defaultweb.service
 After=defaultweb.service
 
