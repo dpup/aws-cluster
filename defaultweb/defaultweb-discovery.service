@@ -9,8 +9,12 @@ EnvironmentFile=/etc/environment
 RemainAfterExit=yes
 
 ExecStart=/bin/sh -c "/bin/etcdctl set \"/vulcand/upstreams/defaultweb/endpoints/defaultweb.service\" http://$COREOS_PRIVATE_IPV4:5000; \
-  /bin/etcdctl set \"/vulcand/hosts/601fourth.com/locations/home/path\" '/.*'; \
-  /bin/etcdctl set /vulcand/hosts/601fourth.com/locations/home/upstream defaultweb"
+  /bin/etcdctl set /vulcand/hosts/601fourth.com/locations/home/path '/.*'; \
+  /bin/etcdctl set /vulcand/hosts/601fourth.com/locations/home/upstream defaultweb; \
+  /bin/etcdctl set /vulcand/hosts/macpups.com/locations/home/path '/.*'; \
+  /bin/etcdctl set /vulcand/hosts/macpups.com/locations/home/upstream defaultweb; \
+  /bin/etcdctl set /vulcand/hosts/sixzeroone.com/locations/home/path '/.*'; \
+  /bin/etcdctl set /vulcand/hosts/sixzeroone.com/locations/home/upstream defaultweb;"
 ExecStop=/bin/sh -c "/bin/etcdctl rm /vulcand/upstreams/defaultweb/endpoints/defaultweb.service"
 
 [X-Fleet]
