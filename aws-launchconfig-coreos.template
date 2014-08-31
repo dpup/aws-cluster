@@ -4,38 +4,38 @@
   "Mappings" : {
       "RegionMap" : {
           "ap-northeast-1" : {
-              "AMI" : "ami-c1421fc0"
+              "AMI" : "ami-1fb9e61e"
           },
           "sa-east-1" : {
-              "AMI" : "ami-dfbe17c2"
+              "AMI" : "ami-8f57fe92"
           },
           "ap-southeast-2" : {
-              "AMI" : "ami-1d2c4a27"
+              "AMI" : "ami-874620bd"
           },
           "ap-southeast-1" : {
-              "AMI" : "ami-4c5a021e"
+              "AMI" : "ami-d6d88084"
           },
           "us-east-1" : {
-              "AMI" : "ami-d4c60ebc"
+              "AMI" : "ami-04a2766c"
           },
           "us-west-2" : {
-              "AMI" : "ami-4d9ee67d"
+              "AMI" : "ami-3193e801"
           },
           "us-west-1" : {
-              "AMI" : "ami-e19c9fa4"
+              "AMI" : "ami-63eae826"
           },
           "eu-west-1" : {
-              "AMI" : "ami-cb4293bc"
+              "AMI" : "ami-92ea39e5"
           }
       }
   },
   "Parameters": {
     "InstanceType" : {
-      "Description" : "EC2 PV instance type (m3.medium, etc). Note: m1.small is not supported.",
+      "Description" : "EC2 PV instance type (m3.medium, etc).",
       "Type" : "String",
       "Default" : "t1.micro",
-      "AllowedValues" : ["m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m1.medium", "m1.large", "m1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c1.medium", "c1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "hi1.4xlarge", "hs1.8xlarge", "t1.micro"],
-      "ConstraintDescription" : "Must be a valid EC2 PV instance type. Note: m1.small is not supported."
+      "AllowedValues" : ["m1.small", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m1.medium", "m1.large", "m1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c1.medium", "c1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "hi1.4xlarge", "hs1.8xlarge", "t1.micro"],
+      "ConstraintDescription" : "Must be a valid EC2 PV instance type."
     },
     "ClusterSize": {
       "Default": "5",
@@ -141,7 +141,10 @@
               "UnhealthyThreshold" : "5",
               "Interval" : "30",
               "Timeout" : "5"
-          }
+          },
+          "SecurityGroups": [
+              {"Ref": "CoreOSSecurityGroup"}
+          ]
       }
     },
     "CoreOSServerAutoScale": {
