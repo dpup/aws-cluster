@@ -8,14 +8,17 @@ User=core
 EnvironmentFile=/etc/environment
 RemainAfterExit=yes
 
-ExecStart=/bin/sh -c "/bin/etcdctl set \"/vulcand/upstreams/defaultweb/endpoints/defaultweb.service\" http://$COREOS_PRIVATE_IPV4:5000; \
-  /bin/etcdctl set /vulcand/hosts/601fourth.com/locations/home/path '/.*'; \
-  /bin/etcdctl set /vulcand/hosts/601fourth.com/locations/home/upstream defaultweb; \
-  /bin/etcdctl set /vulcand/hosts/macpups.com/locations/home/path '/.*'; \
-  /bin/etcdctl set /vulcand/hosts/macpups.com/locations/home/upstream defaultweb; \
-  /bin/etcdctl set /vulcand/hosts/sixzeroone.com/locations/home/path '/.*'; \
-  /bin/etcdctl set /vulcand/hosts/sixzeroone.com/locations/home/upstream defaultweb;"
-ExecStop=/bin/sh -c "/bin/etcdctl rm /vulcand/upstreams/defaultweb/endpoints/defaultweb.service"
+ExecStart=/bin/sh -c "while true; \
+  do \
+  /bin/etcdctl set --ttl 60 /vulcand/upstreams/defaultweb/endpoints/defaultweb.service http://$COREOS_PRIVATE_IPV4:5000; \
+  /bin/etcdctl set --ttl 60 /vulcand/hosts/601fourth.com/locations/home/path '/.*'; \
+  /bin/etcdctl set --ttl 60 /vulcand/hosts/601fourth.com/locations/home/upstream defaultweb; \
+  /bin/etcdctl set --ttl 60 /vulcand/hosts/sixzeroone.com/locations/home/path '/.*'; \
+  /bin/etcdctl set --ttl 60 /vulcand/hosts/sixzeroone.com/locations/home/upstream defaultweb; \
+  /bin/etcdctl set --ttl 60 /vulcand/hosts/sevenshades.com/locations/home/path '/.*'; \
+  /bin/etcdctl set --ttl 60 /vulcand/hosts/sevenshades.com/locations/home/upstream defaultweb; \
+  echo Default Web running at http://$COREOS_PRIVATE_IPV4:5000 and registered with etcd; \
+  sleep 45; done;"
 
 [X-Fleet]
 X-ConditionMachineOf=defaultweb.service
