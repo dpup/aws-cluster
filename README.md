@@ -1,7 +1,8 @@
 # aws-cluster
 
-This repo contains configuration files to set up a CoreOS cluster on EC2 with an ELB and vulcand
-reverse proxies. There is also a sample configuration for an apache server.
+This repo contains configuration files to set up a CoreOS cluster on EC2 with an ELB and
+[Vulcan](http://www.vulcanproxy.com) reverse proxies. There is also a sample configuration for an
+apache server.
 
 To set up a new cluster:
 
@@ -31,4 +32,4 @@ Then you can start the default apache server using:
 To customize the apache server you'll want to push to your own docker repository, and update the
 service config accordingly.
 
-(Note: [Vulcan](www.vulcanproxy.com) isn't yet intended for production use)
+(Note: [Vulcan](http://www.vulcanproxy.com) isn't yet intended for production use)
