@@ -1,6 +1,7 @@
 # aws-cluster
 
-This repo contains configuration files to set up a CoreOS cluster on EC2 with an ELB and
+This repo contains configuration files to set up a
+[CoreOS cluster on EC2](https://coreos.com/docs/running-coreos/cloud-providers/ec2/) with an ELB and
 [Vulcan](http://www.vulcanproxy.com) reverse proxies. There is also a sample configuration for an
 apache server.
 
