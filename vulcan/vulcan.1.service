@@ -1,1 +1,15 @@
-vulcan.service
+[Unit]
+Description=Vulcan
+After=docker.service
+
+[Service]
+User=core
+Restart=always
+TimeoutSec=180
+
+ExecStartPre=/usr/bin/docker pull mailgun/vulcand
+ExecStart=/bin/bash -c '/usr/bin/docker start -a vulcan || docker run --rm --name vulcan -p 80:80 -p 8182:8182 mailgun/vulcand /opt/vulcan/vulcand -apiInterface="0.0.0.0" -interface="0.0.0.0" -etcd="http://172.17.42.1:4001" -port=80 -apiPort=8182'
+ExecStop=/usr/bin/docker stop vulcan
+
+[X-Fleet]
+X-Conflicts=vulcan*

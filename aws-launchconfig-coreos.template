@@ -16,7 +16,7 @@
               "AMI" : "ami-d6d88084"
           },
           "us-east-1" : {
-              "AMI" : "ami-04a2766c"
+              "AMI" : "ami-ba3295d2"
           },
           "us-west-2" : {
               "AMI" : "ami-3193e801"
@@ -143,7 +143,7 @@
               "Timeout" : "5"
           },
           "SecurityGroups": [
-              {"Ref": "CoreOSSecurityGroup"}
+              {"Fn::GetAtt" : [ "CoreOSSecurityGroup", "GroupId" ]}
           ]
       }
     },
