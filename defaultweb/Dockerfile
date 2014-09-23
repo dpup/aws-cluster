@@ -28,3 +28,6 @@ ADD www /var/www/site
 
 # Update the default apache site with the config we created.
 ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+
+# By default start up apache in the foreground, override with /bin/bash for interative.
+CMD /usr/sbin/apache2ctl -D FOREGROUND
