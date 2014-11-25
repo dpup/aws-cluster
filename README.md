@@ -7,10 +7,13 @@ apache server.
 
 To set up a new cluster:
 
-1. [Create a new stack](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#cstack=sn%7EMyCoreOSCluster)
-2. Select the template
-3. Follow the steps (use `docker login` to get an auth token for private docker repositories)
-4. Make a note of one instance's public IP and export in `CLUSTER_IP`
+1. Set up AWS CLI (tools use the profile "home" at present)
+2. Make sure you have a `~/.dockercfg` file (create one with `docker login`)
+3. Run `node tools/create-stack.js --name MyStack --keypair mykeypair`
+4. Go to the EC2 console and make note of the public IP address of one of the instances and export as `CLUSTER_IP`
+
+You can also [create a new stack](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#cstack=sn%7EMyCoreOSCluster) 
+manually by uploading the template and following the steps.
 
 To start the vulcan instances (assuming you have 5 hosts):
 
@@ -19,7 +22,7 @@ To start the vulcan instances (assuming you have 5 hosts):
 ```
 
 In Route53 create A records for your domains and point at the Load Balancer's public IP (it'll look
-something like MyCluster-ClusterLB-42342ASFGASD-1457111472.us-east-1.elb.amazonaws.com)
+something like `MyCluster-ClusterLB-42342ASFGASD-1457111472.us-east-1.elb.amazonaws.com`).
 
 Update [defaultweb/defaultweb-discovery.service](defaultweb/defaultweb-discovery.service) to include
 the domains you manage.

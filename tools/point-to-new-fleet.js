@@ -40,7 +40,7 @@ exec(CMD_PREFIX + 'elb describe-load-balancers', function (err, stdout, stderr) 
   console.log('  ', targetELB.CanonicalHostedZoneName)
 
   exec(CMD_PREFIX + 'route53 list-hosted-zones', function (err, stdout, stderr) {
-    if (err) return console.error('Error fetching hosted zones:', err);
+    if (err) return console.error('Error fetching hosted zones:', err)
     var zones = JSON.parse(stdout).HostedZones
     console.log('Fetching zone details')
     zones.forEach(function (zone) {
