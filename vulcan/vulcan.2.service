@@ -8,8 +8,8 @@ Restart=always
 TimeoutSec=180
 
 ExecStartPre=/usr/bin/docker pull mailgun/vulcand
-ExecStart=/bin/bash -c '/usr/bin/docker start -a vulcan2 || docker run --rm --name vulcan2 -p 80:80 -p 8182:8182 mailgun/vulcand /opt/vulcan/vulcand -apiInterface="0.0.0.0" -interface="0.0.0.0" -etcd="http://172.17.42.1:4001" -port=80 -apiPort=8182'
-ExecStop=/usr/bin/docker stop vulcan2
+ExecStart=/bin/bash -c 'docker run --rm --name vulcan2 -p 80:80 -p 8181:8181 -p 8182:8182 mailgun/vulcand /go/bin/vulcand -apiInterface="0.0.0.0" -interface="0.0.0.0" -etcd="http://172.17.42.1:4001" -port=80 -apiPort=8182'
+ExecStop=/usr/bin/docker kill vulcan2
 
 [X-Fleet]
 X-Conflicts=vulcan*
